@@ -1,0 +1,10 @@
+name: ClickableChatNames
+description: psrcek's plugin that makes names in chat clickable.
+version: 1.0
+main: si.psrcek.clickableChatNames.Main
+depend: [ProtocolLib, JSON-API]
+
+commands:
+  user:
+    description: a friendly sample :)
+    usage: /<command> <playername>
