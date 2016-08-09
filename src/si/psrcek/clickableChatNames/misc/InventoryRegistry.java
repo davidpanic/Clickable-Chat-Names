@@ -31,8 +31,8 @@ public class InventoryRegistry {
 		promote = createItemStack(Material.DIAMOND,        "§b§lPromote", "§fPromotes the player.", "", "§6Equivalent to: §e/promote player");
 		demote  = createItemStack(Material.COAL,           "§b§lDemote", "§fDemotes the player.", "", "§6Equivalent to: §e/demote player");
 		
-		playerInv = createInventory("§aPlayer actions", website, blankSlot, plot, tpa, tpaHere);
-		staffInv = createInventory("§aPlayer actions", website, blankSlot, plot, tpa, tpaHere, tp, tpo, blankSlot, kick, ban, blankSlot, promote, demote);
+		playerInv = createInventory("§aPlayer actions", 9, website, blankSlot, plot, tpa, tpaHere);
+		staffInv = createInventory("§aPlayer actions", 18, website, blankSlot, plot, tpa, tpaHere, tp, tpo, blankSlot, kick, ban, blankSlot, promote, demote);
 		
 	}
 	
@@ -47,8 +47,10 @@ public class InventoryRegistry {
 		return item;
 	}
 	
-	private static Inventory createInventory(String name, ItemStack... items) {
-		Inventory inv = Bukkit.createInventory(null, items.length, name);
+	private static Inventory createInventory(String name, int size, ItemStack... items) {
+		if (size % 9 != 0) return null;
+		
+		Inventory inv = Bukkit.createInventory(null, size, name);
 		
 		for (int i = 0; i < items.length; i++) {
 			inv.setItem(i, items[i]);
