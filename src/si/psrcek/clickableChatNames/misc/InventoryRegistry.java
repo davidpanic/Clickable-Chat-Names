@@ -50,7 +50,9 @@ public class InventoryRegistry {
 	private static Inventory createInventory(String name, ItemStack... items) {
 		Inventory inv = Bukkit.createInventory(null, items.length, name);
 		
-		inv.addItem(items);
+		for (int i = 0; i < items.length; i++) {
+			inv.setItem(i, items[i]);
+		}
 		
 		return inv;
 	}
