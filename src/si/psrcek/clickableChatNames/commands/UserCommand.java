@@ -7,6 +7,7 @@ import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
+import si.psrcek.clickableChatNames.Main;
 import si.psrcek.clickableChatNames.misc.InventoryRegistry;
 
 public class UserCommand implements CommandExecutor {
@@ -39,6 +40,8 @@ public class UserCommand implements CommandExecutor {
 			player.sendMessage(ChatColor.RED + selectedName + " is not a valid online player!");
 			return true;
 		}
+		
+		Main.selectedPlayers.put(player, selectedPlayer);
 		
 		if (player.hasPermission("clickablechat.staff")) {
 			player.openInventory(InventoryRegistry.staffInv);

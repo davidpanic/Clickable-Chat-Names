@@ -1,6 +1,10 @@
 package si.psrcek.clickableChatNames;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
+import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -15,9 +19,13 @@ import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.ListenerPriority;
 
 public class Main extends JavaPlugin implements Listener {
+	public static Map<Player, Player> selectedPlayers;
+	
 	public ProtocolManager protocolManager;
 
 	public void onEnable() {
+		selectedPlayers = new HashMap<Player, Player>();
+		
 		protocolManager = ProtocolLibrary.getProtocolManager();
 		
 		InventoryRegistry.init();
