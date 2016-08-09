@@ -7,6 +7,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import si.psrcek.clickableChatNames.adapters.ClickableChatPacketAdapter;
 import si.psrcek.clickableChatNames.commands.UserCommand;
 import si.psrcek.clickableChatNames.listeners.InventoryClickListener;
+import si.psrcek.clickableChatNames.misc.InventoryRegistry;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;
@@ -18,6 +19,8 @@ public class Main extends JavaPlugin implements Listener {
 
 	public void onEnable() {
 		protocolManager = ProtocolLibrary.getProtocolManager();
+		
+		InventoryRegistry.init();
 		
 		registerListeners();
 		registerCommands();
