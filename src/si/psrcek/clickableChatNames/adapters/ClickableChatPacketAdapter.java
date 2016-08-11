@@ -30,8 +30,7 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 			// get the packet
 			PacketContainer packet = event.getPacket();
 			
-			//Bukkit.getLogger().info("Real message: " + packet.getChatComponents().read(0).getJson());
-			//String message = " §4§opsrekt §7→ §rderp";
+			// get the message
 			String message = packet.getChatComponents().read(0).getJson();
 			String newMessage = null;
 			
@@ -41,11 +40,7 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 				e.printStackTrace();
 			}
 			
-			Bukkit.getLogger().info("Real message: " + message);
-			Bukkit.getLogger().info("--------------------------------");
-			
 			if (newMessage != null) {
-				Bukkit.getLogger().info("Converted message: " + newMessage);
 				
 				// set the message
 				packet.getChatComponents().write(0, WrappedChatComponent.fromJson(newMessage));
@@ -58,21 +53,6 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 	private String formatChatMessage(String message) throws MalformedJSONException {
 		JSONObject oldMessage = new JSONObject(message);
 		JSONArray extra = (JSONArray) oldMessage.get("extra");
-		
-		// inputs:                  000, 111111111111111111111111111111111111111111111111111, 222222222222222222222222222222222222222, 3333333333333333333333333333, 4444444444444444444444444444, 55555
-		// nick + donor+: {"extra":[" ", {"italic":true,"color":"dark_red","text":"psrekt "}, {"bold":true,"color":"gold","text":"$"}, " ",                          {"color":"gray","text":"→ "}, "ech"],  "text":""}
-		// nick + donor:  {"extra":[" ", {"italic":true,"color":"dark_red","text":"psrekt "}, {"color":"gold","text":"$"},             " ",                          {"color":"gray","text":"→ "}, "ech"],  "text":""}
-		// nick:          {"extra":[" ", {"italic":true,"color":"dark_red","text":"psrekt"},  " ",                                     {"color":"gray","text":"→ "}, "ech"],                                "text":""}
-		// donor:         {"extra":[" ", {"color":"dark_red","text":"psrcek "},               {"color":"gold","text":"$"},             " ",                          {"color":"gray","text":"→ "}, "ech"],  "text":""}
-		// donor+:        {"extra":[" ", {"color":"dark_red","text":"psrcek "},               {"bold":true,"color":"gold","text":"$"}, " ",                          {"color":"gray","text":"→ "}, "ech"],  "text":""}
-		// nothing:       {"extra":[" ", {"color":"dark_red","text":"psrcek"},                " ",                                     {"color":"gray","text":"→ "}, "ech"],                                "text":""}
-		
-		// 0    = " "
-		// 1    = name
-		// 2    = donor or space
-		// 3    = arrow or space
-		// 4    = arrow or chat
-		// 5... = empty or chat
 		
 		if (extra != null) {
 			JSONObject arrow = null;
