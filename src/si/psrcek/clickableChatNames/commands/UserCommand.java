@@ -22,12 +22,12 @@ public class UserCommand implements CommandExecutor {
 		Player player = (Player) sender;
 		Player selectedPlayer = null;
 		
-		if (args.length != 1) {
+		if (args.length > 2) {
 			player.sendMessage(ChatColor.RED + "Usage: " + command.getUsage());
 			return true;
 		}
 		
-		String selectedName = ChatColor.stripColor(args[0]);
+		String selectedName = args[0];
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			if (p.getName().contains(selectedName)) {
