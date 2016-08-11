@@ -31,7 +31,7 @@ public class InventoryRegistry {
 		promote = createItemStack(Material.DIAMOND,            "§b§lPromote", "§fPromotes the player.", "", "§6Equivalent to: §e/promote player");
 		demote  = createItemStack(Material.COAL,               "§b§lDemote", "§fDemotes the player.", "", "§6Equivalent to: §e/demote player");
 		
-		playerInv = createInventory("§aPlayer actions",  9, website, blankSlot, plot, blankSlot, tpa, tpaHere);
+		playerInv = createInventory("§aPlayer actions",  9, website, blankSlot, blankSlot, blankSlot, plot,      blankSlot, blankSlot, tpa,     tpaHere);
 		
 		staffInv  = createInventory("§aPlayer actions", 18, website, blankSlot, plot,      blankSlot, tpa,       tpaHere,   blankSlot, tp,      tpo, 
 		                                                    kick,    ban,       blankSlot, blankSlot, blankSlot, blankSlot, blankSlot, promote, demote);
