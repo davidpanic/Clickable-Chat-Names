@@ -96,6 +96,10 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 				
 				unColoredName = unColoredName.replaceAll("\"", "").trim();
 				
+				if (unColoredName.endsWith(" $")) {
+					unColoredName = unColoredName.substring(0, unColoredName.length()-2);
+				}
+				
 				JSONArray name2 = new JSONArray();
 				ClickEvent ce = new ClickEvent(ClickAction.RUN_COMMAND, "/user " + unColoredName);
 				
