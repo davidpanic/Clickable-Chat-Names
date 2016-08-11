@@ -98,7 +98,7 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 				
 				ClickEvent ce = new ClickEvent(ClickAction.RUN_COMMAND, "/user " + player.getName());
 				
-				for (int i = 1; i < nameEnd; i++) {
+				for (int i = 0; i < nameEnd; i++) {
 					JSONProperty p = extra.get(i);
 					
 					if (p instanceof JSONObject) {
@@ -120,7 +120,6 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 					chat.add(p);
 				}
 				
-				//TODO: construct new msg
 				JSONArray newMsg = new JSONArray();
 				newMsg.addAll(name);
 				newMsg.add(new JSONString(" "));
