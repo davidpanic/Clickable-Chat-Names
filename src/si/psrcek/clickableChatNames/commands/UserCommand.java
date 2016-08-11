@@ -27,7 +27,7 @@ public class UserCommand implements CommandExecutor {
 			return true;
 		}
 		
-		String selectedName = ChatColor.stripColor(args[0]);
+		String selectedName = args[0];
 		
 		for (Player p : Bukkit.getOnlinePlayers()) {
 			if (p.getName().contains(selectedName)) {
