@@ -1,7 +1,6 @@
 package si.psrcek.clickableChatNames.adapters;
 
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
 import com.comphenix.protocol.PacketType;
@@ -37,7 +36,7 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 			String newMessage = null;
 			
 			try {
-				newMessage = formatChatMessage(message, event.getPlayer());
+				newMessage = formatChatMessage(message);
 			} catch (MalformedJSONException e) {
 				e.printStackTrace();
 			}
@@ -56,7 +55,7 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 		}
 	}
 
-	private String formatChatMessage(String message, Player player) throws MalformedJSONException {
+	private String formatChatMessage(String message) throws MalformedJSONException {
 		JSONObject oldMessage = new JSONObject(message);
 		JSONArray extra = (JSONArray) oldMessage.get("extra");
 		
@@ -96,22 +95,34 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 				JSONArray name = new JSONArray();
 				JSONArray chat = new JSONArray();
 				
-				ClickEvent ce = new ClickEvent(ClickAction.RUN_COMMAND, "/user " + player.getName());
-				
 				for (int i = 0; i < nameEnd; i++) {
 					JSONProperty p = extra.get(i);
 					
 					if (p instanceof JSONObject) {
-						JSONObject tempObj = (JSONObject) p;
-						tempObj.set("clickEvent", ce);
-						name.add(tempObj);
+						name.add(p);
 						
 					} else if (p instanceof JSONString) {
 						JSONObject tempObj = new JSONObject();
 						tempObj.set("text", p);
-						tempObj.set("clickEvent", ce);
 						name.add(tempObj);
 					}
+				}
+				
+				String unColoredName = "";
+				
+				for (int i = 0; i < name.size(); i++) {
+					unColoredName = unColoredName + ((JSONObject) name.get(i)).get("text");
+				}
+				
+				unColoredName = unColoredName.replaceAll("\"", "").trim();
+				
+				JSONArray name2 = new JSONArray();
+				ClickEvent ce = new ClickEvent(ClickAction.RUN_COMMAND, "/user " + unColoredName);
+				
+				for (int i = 0; i < name.size(); i++) {
+					JSONObject text = (JSONObject) name.get(i);
+					text.set("clickEvent", ce);
+					name2.add(text);
 				}
 				
 				for (int i = chatStart; i < extra.size(); i++) {
@@ -121,7 +132,7 @@ public class ClickableChatPacketAdapter extends PacketAdapter {
 				}
 				
 				JSONArray newMsg = new JSONArray();
-				newMsg.addAll(name);
+				newMsg.addAll(name2);
 				newMsg.add(new JSONString(" "));
 				newMsg.add(arrow);
 				newMsg.addAll(chat);
