@@ -6,9 +6,13 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.Plugin;
 
 import si.psrcek.clickableChatNames.Main;
 import si.psrcek.clickableChatNames.misc.InventoryRegistry;
+
+import com.earth2me.essentials.Essentials;
+import com.earth2me.essentials.User;
 
 public class UserCommand implements CommandExecutor {
 
@@ -29,16 +33,39 @@ public class UserCommand implements CommandExecutor {
 		
 		String selectedName = args[0];
 		
+		Plugin essPl = Bukkit.getServer().getPluginManager().getPlugin("Essentials");
+		Essentials essentials = null;
+		
+		if (essPl != null) {
+			essentials = (Essentials) essPl;
+		}
+		
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			if (p.getName().contains(selectedName)) {
+			if (p.getName().equals(selectedName)) {
 				selectedPlayer = p;
 				break;
 			} else if (p.getCustomName() != null) {
-				if (p.getCustomName().contains(selectedName)) {
+				if (p.getCustomName().equals(selectedName)) {
 					selectedPlayer = p;
 					break;
 				}
+			} else if (essPl != null) {
+				User user = new User(p, essentials);
+				
+				if (user != null) {
+					String nickname = user.getNickname();
+					
+					if (nickname != null) {
+						nickname = nickname.replaceAll("&.", "").replaceAll("§.", "");
+						
+						if (nickname.equals(selectedName)) {
+							selectedPlayer = p;
+							break;
+						}
+					}
+				}
 			}
+			
 		}
 		
 		if (selectedPlayer == null) {
