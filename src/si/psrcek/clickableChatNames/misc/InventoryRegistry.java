@@ -12,12 +12,14 @@ import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
 public class InventoryRegistry {
-	public static Inventory playerInv, staffInv, kickInv, banInv;
+	public static Inventory playerInv, staffInv, kickInv, banInv, banTimeInv;
 	
 	public static ItemStack website, plot, tpa, tpaHere, tp, tpo, kick, ban, promote, demote;
 	
 	public static ItemStack kickCaps, kickSpam, kickAdvertising, kickEntitySpam;
 	public static ItemStack banCaps,  banSpam,  banAdvertising,  banEntitySpam, banExploitingBugs, banCheating, banServerCrash, banGriefing;
+	
+	public static ItemStack time1h, time3h, time5h, time12h, time1d, time3d, time1w, time1mo, timePerm;
 	
 	public static ItemStack blankSlot = new ItemStack(Material.AIR);
 	
@@ -76,6 +78,19 @@ public class InventoryRegistry {
 		kickInv = createInventory("§bKick reasons", 9, kickCaps, kickSpam, kickAdvertising, kickEntitySpam);
 		
 		banInv  = createInventory("§4Ban reasons",  9, banCaps,  banSpam,  banAdvertising,  banEntitySpam, blankSlot, banExploitingBugs, banCheating, banServerCrash, banGriefing);
+		
+		
+		time1h   = createItemStack(Material.WATCH,  1, "§c§l1 hour ban");
+		time3h   = createItemStack(Material.WATCH,  3, "§c§l3 hour ban");
+		time5h   = createItemStack(Material.WATCH,  5, "§c§l5 hour ban");
+		time12h  = createItemStack(Material.WATCH, 12, "§c§l12 hour ban");
+		time1d   = createItemStack(Material.WATCH,  1, "§c§l1 day ban");
+		time3d   = createItemStack(Material.WATCH,  3, "§c§l3 day ban");
+		time1w   = createItemStack(Material.WATCH,  1, "§c§l1 week ban");
+		time1mo  = createItemStack(Material.WATCH,  1, "§c§l1 month ban");
+		timePerm = createItemStack(Material.WATCH,  1, "§c§lPermanent ban");
+		
+		banTimeInv = createInventory("§cBan time", 9, time1h, time3h, time5h, time12h, time1d, time3d, time1w, time1mo, timePerm);
 	}
 	
 	private static ItemStack addSkullOwner(ItemStack item, UUID uuid) {
