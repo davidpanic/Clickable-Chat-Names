@@ -34,8 +34,8 @@ public class InventoryRegistry {
 		tp      = createItemStack(Material.MINECART,           "§b§lTeleport", "§fTeleports you to", "§fthe player.", "", "§6Equivalent to: §e/tp player");
 		tpo     = createItemStack(Material.EXPLOSIVE_MINECART, "§b§lForce Teleport", "§fTeleports you to", "§fthe player, even if", "§fhe/she has teleportation disabled", "", "§6Equivalent to: §e/tpo player");
 		
-		kick    = createItemStack(Material.DIAMOND_BOOTS,      "§b§lKick", "§fKicks the player.", "§4Warning: you cannot", "§4specify a reason!", "", "§6Equivalent to: §e/kick player");
-		ban     = createItemStack(Material.BARRIER,            "§b§lBan", "§fBans the player.", "§4Warning: you cannot", "§4specify a reason!", "", "§6Equivalent to: §e/ban player");
+		kick    = createItemStack(Material.DIAMOND_BOOTS,      "§b§lKick", "§fKicks the player.");
+		ban     = createItemStack(Material.BARRIER,            "§b§lBan", "§fBans the player.");
 		
 		promote = createItemStack(Material.DIAMOND,            "§b§lPromote", "§fPromotes the player.", "", "§6Equivalent to: §e/promote player");
 		demote  = createItemStack(Material.COAL,               "§b§lDemote", "§fDemotes the player.", "", "§6Equivalent to: §e/demote player");
