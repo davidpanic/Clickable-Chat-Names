@@ -8,8 +8,8 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
-import si.psrcek.clickableChatNames.Main;
 import si.psrcek.clickableChatNames.misc.InventoryRegistry;
+import si.psrcek.clickableChatNames.misc.MiscRegistry;
 
 import com.earth2me.essentials.Essentials;
 import com.earth2me.essentials.User;
@@ -73,7 +73,7 @@ public class UserCommand implements CommandExecutor {
 			return true;
 		}
 		
-		Main.selectedPlayers.put(player, selectedPlayer);
+		MiscRegistry.selectedPlayers.put(player, selectedPlayer);
 		
 		if (player.hasPermission("clickablechat.staff")) {
 			player.openInventory(InventoryRegistry.staffInv);

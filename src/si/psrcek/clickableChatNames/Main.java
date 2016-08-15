@@ -1,10 +1,6 @@
 package si.psrcek.clickableChatNames;
 
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -12,28 +8,20 @@ import si.psrcek.clickableChatNames.adapters.ClickableChatPacketAdapter;
 import si.psrcek.clickableChatNames.commands.UserCommand;
 import si.psrcek.clickableChatNames.listeners.InventoryClickListener;
 import si.psrcek.clickableChatNames.misc.InventoryRegistry;
+import si.psrcek.clickableChatNames.misc.MiscRegistry;
 
 import com.comphenix.protocol.PacketType;
-import com.comphenix.protocol.ProtocolLibrary;
-import com.comphenix.protocol.ProtocolManager;
 import com.comphenix.protocol.events.ListenerPriority;
 
 public class Main extends JavaPlugin implements Listener {
-	public static Map<Player, Player> selectedPlayers;
-	
-	public ProtocolManager protocolManager;
-
 	public void onEnable() {
-		selectedPlayers = new HashMap<Player, Player>();
-		
-		protocolManager = ProtocolLibrary.getProtocolManager();
-		
+		MiscRegistry.init();
 		InventoryRegistry.init();
 		
 		registerListeners();
 		registerCommands();
 		
-		protocolManager.addPacketListener(new ClickableChatPacketAdapter(this, ListenerPriority.HIGH, PacketType.Play.Server.CHAT));
+		MiscRegistry.protocolManager.addPacketListener(new ClickableChatPacketAdapter(this, ListenerPriority.HIGH, PacketType.Play.Server.CHAT));
 		
 		getLogger().info("Enabled!");
 	}
